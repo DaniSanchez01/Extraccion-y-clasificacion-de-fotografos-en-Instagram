@@ -12,13 +12,14 @@ from email.message import EmailMessage
 import ssl
 import smtplib
 
+####################################################################################################################
+######                                         Parámetros a ajustar                                           ######
+####################################################################################################################
 
-PHOTOS_TO_DOWNLOAD = 30
 
-nombreCuentas = ["username1","username2", "username3","username4","username5","username6","username7"]
-password = ["password1","password2", "password3", "password4","password5","password6","password7"]
+accounts = ["username1","username2", "username3","username4","username5","username6","username7"]
+passwords = ["password1","password2", "password3", "password4","password5","password6","password7"]
 
-cuentasBloqueadas = []
 
 userAgents =["Mozilla/5.0 (Linux; Android 7.0; SM-G920F Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/65.0.3325.109 Mobile Safari/537.36 Instagram 37.0.0.21.97 Android (24/7.0; 640dpi; 1440x2560; samsung; SM-G920F; zeroflte; samsungexynos7420; uk_UA; 98288242)", 
                 "Mozilla/5.0 (Linux; Android 9; LG-H873 Build/PKQ1.190522.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/111.0.5563.57 Mobile Safari/537.36 Instagram 274.0.0.26.90 Android (28/9; 640dpi; 1440x2672; LGE/lge; LG-H873; lucye; lucye; en_CA; 456141812)" , 
@@ -28,11 +29,17 @@ userAgents =["Mozilla/5.0 (Linux; Android 7.0; SM-G920F Build/NRD90M; wv) AppleW
                 "Mozilla/5.0 (Linux; Android 10; POT-LX1 Build/HUAWEIPOT-L21; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Mobile Safari/537.36 Instagram 275.0.0.0.47 Android (29/10; 408dpi; 1080x2139; HUAWEI; POT-LX1; HWPOT-H; kirin710; tr_TR; 455734489)",
                 "Mozilla/5.0 (Linux; Android 12; SM-A325F Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.153 Mobile Safari/537.36 Instagram 273.1.0.16.72 Android (31/12; 420dpi; 1080x2194; samsung; SM-A325F; a32; mt6769t; tr_TR; 455206193)"]
 
+INFO_FILE = 'listaPerfiles'
+PHOTOS_TO_DOWNLOAD = 30
+
 emailEmisor = 'miCorreo@gmail.com'
 emailPassword = 'miContraseña'
 emailReceptor = 'correoReceptor@gmail.com'
 
-PERFILES = 'listaPerfiles'
+####################################################################################################################
+####################################################################################################################
+
+cuentasBloqueadas = []
 
 
 #Esta función inicializa todas las cuentas que tenemos para
@@ -43,7 +50,7 @@ def initialize():
     #el login es porque la cuenta está bloqueada. Guardamos las cuentas bloqueadas en otra lista
     try:
         L1 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False, max_connection_attempts=1 , download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[1],slide='1')
-        L1.login(nombreCuentas[1],password[1])
+        L1.login(accounts[1],passwords[1])
         lista.append(L1)
         logging.info("Acceso a cuenta 1 realizado correctamente")
     except:
@@ -53,7 +60,7 @@ def initialize():
     
     try:
         L2 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False, max_connection_attempts=1,download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[2],slide='1')
-        L2.login(nombreCuentas[2],password[2])
+        L2.login(accounts[2],passwords[2])
         lista.append(L2)
         logging.info("Acceso a cuenta 2 realizado correctamente")
     except:
@@ -63,7 +70,7 @@ def initialize():
 
     try:
         L3 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[3],slide='1')
-        L3.login(nombreCuentas[3],password[3])
+        L3.login(accounts[3],passwords[3])
         lista.append(L3)
         logging.info("Acceso a cuenta 3 realizado correctamente")
     except:
@@ -73,7 +80,7 @@ def initialize():
    
     try:
         L4 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[4],slide='1')
-        L4.login(nombreCuentas[4],password[4])
+        L4.login(accounts[4],passwords[4])
         lista.append(L4)
         logging.info("Acceso a cuenta 4 realizado correctamente")
     except:
@@ -83,7 +90,7 @@ def initialize():
 
     try:
         L5 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[5],slide='1')
-        L5.login(nombreCuentas[5],password[5])
+        L5.login(accounts[5],passwords[5])
         lista.append(L5)
         logging.info("Acceso a cuenta 5 realizado correctamente")
     except:
@@ -93,7 +100,7 @@ def initialize():
     
     try:
         L6 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=True, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[6],slide='1')
-        L6.login(nombreCuentas[6],password[6])
+        L6.login(accounts[6],passwords[6])
         lista.append(L6)
         logging.info("Acceso a cuenta 6 realizado correctamente")
     except:
@@ -161,9 +168,9 @@ def makeStats():
     return porc
 
 def removeUser(username): 
-    list = checkpoint(PERFILES)
+    list = checkpoint(INFO_FILE)
     list.remove(username)
-    save_checkpoint(PERFILES,list)
+    save_checkpoint(INFO_FILE,list)
 
 def enviarCorreo(asunto):
 
@@ -187,7 +194,7 @@ def enviarCorreo(asunto):
 def main():
     
     LEsp = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[0])
-    LEsp.login(nombreCuentas[0],password[0])
+    LEsp.login(accounts[0],passwords[0])
     logging.info("Acceso a cuenta especial realizado correctamente")
     
     nerrors = 0
@@ -215,7 +222,7 @@ def main():
             users = list()
             nperfiles = 0
             #Recuperamos la lista de todos los usernames que hemos recopidado
-            usernames = checkpoint(PERFILES)
+            usernames = checkpoint(INFO_FILE)
             #Recuperamos la lista de todos los usuarios que hemos descargado
             u = checkpoint("usuarios")
             perfilesDescargados = len(u)

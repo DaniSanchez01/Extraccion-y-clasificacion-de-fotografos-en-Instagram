@@ -5,16 +5,14 @@ import time
 import instaloader
 import json
 
-PROFILES_TO_DOWNLOAD = 2000
-
-nombreCuentas = ["username1","username2", "username3","username4","username5","username6","username7"]
-password = ["password1","password2", "password3", "password4","password5","password6","password7"]
-
-NOMBRE_JSON = "perfilesCanon"
-HASHTAG = "canon"
+####################################################################################################################
+######                                         Parámetros a ajustar                                           ######
+####################################################################################################################
 
 
-cuentasBloqueadas = []
+accounts = ["username1","username2", "username3","username4","username5","username6","username7"]
+passwords = ["password1","password2", "password3", "password4","password5","password6","password7"]
+
 userAgents =[   "Mozilla/5.0 (Linux; Android 12; SM-A515F Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/109.0.5414.117 Mobile Safari/537.36 Instagram 269.0.0.18.75 Android (31/12; 420dpi; 1080x2186; samsung; SM-A515F; a51; exynos9611; it_IT; 444561847)" , 
                 "Mozilla/5.0 (Linux; Android 12; SM-A025G Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.5005.125 Mobile Safari/537.36 Instagram 267.0.0.18.93 Android (31/12; 280dpi; 720x1471; samsung; SM-A025G; a02q; qcom; it_IT; 440638564)", 
                 "Mozilla/5.0 (Linux; Android 13; SM-M127F Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/104.0.5112.97 Mobile Safari/537.36 Instagram 269.0.0.18.75 Android (33/13; 300dpi; 720x1465; samsung; SM-M127F; m12; exynos850; it_IT; 444561846)" , 
@@ -22,12 +20,21 @@ userAgents =[   "Mozilla/5.0 (Linux; Android 12; SM-A515F Build/SP1A.210812.016;
                 "Mozilla/5.0 (Linux; Android 12; RMX3521 Build/RKQ1.211119.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/109.0.5414.117 Mobile Safari/537.36 Instagram 269.0.0.18.75 Android (31/12; 480dpi; 1080x2153; realme; RMX3521; RE54E2L1; qcom; en_US; 444561847)",
                 "Mozilla/5.0 (Linux; Android 12; SM-A127F Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/105.0.5195.136 Mobile Safari/537.36 Instagram 265.0.0.19.301 Android (31/12; 300dpi; 720x1467; samsung; SM-A127F; a12s; exynos850; it_IT; 436384411))"]
 
+HASHTAG = "canon"
+USERNAME_FILE = "perfilesCanon"
+PROFILES_TO_DOWNLOAD = 2000
+
+####################################################################################################################
+####################################################################################################################
+
+cuentasBloqueadas = []
+
 def initialize():
     lista = list()
     
     try:
         L1 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False, max_connection_attempts=1 , download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[0])
-        L1.login(nombreCuentas[0],password[0])
+        L1.login(accounts[0],passwords[0])
         lista.append(L1)
     except:
         print("Cuenta 1 bloqueada")
@@ -36,7 +43,7 @@ def initialize():
 
     try:
         L2 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False, max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[1])
-        L1.login(nombreCuentas[1],password[1])
+        L1.login(accounts[1],passwords[1])
         lista.append(L2)
     except:
         print("Cuenta 2 bloqueada")
@@ -46,7 +53,7 @@ def initialize():
 
     try:
         L3 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[2])
-        L1.login(nombreCuentas[2],password[2])
+        L1.login(accounts[2],passwords[2])
         lista.append(L3)
     except:
         print("Cuenta 3 bloqueada")
@@ -55,7 +62,7 @@ def initialize():
 
     try:
         L4 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[3])
-        L1.login(nombreCuentas[3],password[3])
+        L1.login(accounts[3],passwords[3])
         lista.append(L4)
     except:
         print("Cuenta 4 bloqueada")
@@ -64,7 +71,7 @@ def initialize():
 
     try:
         L5 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[4])
-        L1.login(nombreCuentas[4],password[4])
+        L1.login(accounts[4],passwords[4])
         lista.append(L5)
     except:
         print("Cuenta 5 bloqueada")
@@ -73,7 +80,7 @@ def initialize():
    
     try:
         L6 = instaloader.Instaloader(download_videos=False,download_video_thumbnails=False,max_connection_attempts=1,download_comments=True, save_metadata=False, post_metadata_txt_pattern="", iphone_support=False, user_agent=userAgents[5])
-        L1.login(nombreCuentas[5],password[5])
+        L1.login(accounts[5],passwords[5])
         lista.append(L6)
     except:
         print("Cuenta 6 bloqueada")
@@ -120,7 +127,7 @@ if __name__ == "__main__":
             #Cogemos un iterador que ira recorriendo los posts del hashtag que hayamos elegido 
             posts = instaloader.Hashtag.from_name(L.context, HASHTAG).get_posts_resumable()
             #Guardamos en una lista todos los perfiles que ya habiamos recopilado
-            users = checkpoint(NOMBRE_JSON)
+            users = checkpoint(USERNAME_FILE)
             #Count guarda el numero de perfiles que faltan por recopilar (Num de perfiles que queremos recopilar - Num perfiles recopilados)
             count = PROFILES_TO_DOWNLOAD - len(users["usernames"])
             #Para cada post
@@ -136,7 +143,7 @@ if __name__ == "__main__":
                     print("Numero de perfiles encontrados =",len(users["usernames"]))
                     #Cada 20 perfiles encontrados se guardan en un .json (para no perderlos en caso de error) 
                     if (len(users["usernames"])%5==0):
-                        save_checkpoint(NOMBRE_JSON,users)
+                        save_checkpoint(USERNAME_FILE,users)
                     if (len(users["usernames"])%20==0):
                         cuentaActual = siguienteCuenta(listaCuentas,cuentaActual)
                         L = listaCuentas[cuentaActual]

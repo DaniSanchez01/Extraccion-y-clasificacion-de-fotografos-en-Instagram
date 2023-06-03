@@ -13,6 +13,14 @@ from joblib import dump, load
 
 import matplotlib.pyplot as plt
 
+####################################################################################################################
+######                                         Parámetros a ajustar                                           ######
+####################################################################################################################
+
+DATASET_FILE = 'dataset.csv'
+
+####################################################################################################################
+####################################################################################################################
 
 # Crea un gráfico circular con el porcentaje de fotógrafos prefesionales y los que no
 def show_loan_distrib(y):
@@ -35,7 +43,7 @@ def show_loan_distrib(y):
     plt.show()
 
 # Lee el archivo CSV y lo convierte en un DataFrame
-dataset = pd.read_csv('dataset.csv', header=0)
+dataset = pd.read_csv(DATASET_FILE, header=0)
 plt.rcParams.update({'font.size': 12}) 
 
 # Cogemos todas las características, eliminando la fila de la etiqueta
