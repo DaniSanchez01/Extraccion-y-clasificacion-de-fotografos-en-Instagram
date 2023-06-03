@@ -1,0 +1,1 @@
+{"class_weight": null, "criterion": "gini", "max_depth": 6, "max_features": "log2", "min_samples_leaf": 0.01, "min_samples_split": 0.005, "n_estimators": 200, "n_jobs": -1}
